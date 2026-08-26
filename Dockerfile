@@ -1,6 +1,7 @@
-FROM php:8.2-apache
+# استخدام PHP 8.4 بدلاً من 8.2
+FROM php:8.4-apache
 
-# تثبيت حزم النظام وامتدادات PHP (أضفنا pgsql لدعم PostgreSQL)
+# تثبيت حزم النظام وامتدادات PHP المطلوبة لـ Laravel
 RUN apt-get update && apt-get install -y \
     git \
     curl \
