@@ -51,6 +51,14 @@ Route::middleware('auth')->group(function () {
 
 // مسارات API للمزامنة
 Route::middleware('auth:sanctum')->post('/delete-product', [App\Http\Controllers\Api\ProductSyncController::class, 'destroy']);
-
+// مسار مؤقت لتوليد توكن (احذفه بعد الحصول على التوكن)
+Route::get('/generate-token', function () {
+    $user = App\Models\User::firstOrCreate(
+        ['email' => 'admin@khaled.com'],
+        ['name' => 'Admin', 'password' => bcrypt('password')]
+    );
+    $token = $user->createToken('pos-sync-token')->plainTextToken;
+    return "Your API Token is: <br><textarea style='width:100%; height:100px; font-size:18px;'>". $token ."</textarea>";
+});
 // مسارات المصادقة (تسجيل الدخول/إنشاء حساب)
 require __DIR__.'/auth.php';
