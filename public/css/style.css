@@ -1,0 +1,198 @@
+ 
+    /* ===== Product Gallery ===== */
+    .product-gallery {
+        position: relative;
+    }
+    .main-image-container {
+        position: relative;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+    .main-image {
+        width: 100%;
+        height: 460px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+        cursor: crosshair;
+        background: #fff;
+    }
+    .main-image:hover {
+        transform: scale(1.04);
+    }
+    .thumbnail-list {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+    .thumbnail-btn {
+        width: 68px;
+        height: 68px;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        overflow: hidden;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.2s;
+        background: #fff;
+        padding: 2px;
+    }
+    .thumbnail-btn:hover {
+        border-color: #cbd5e1;
+    }
+    .thumbnail-btn.active {
+        border-color: #D32F2F;
+        box-shadow: 0 0 0 1px #D32F2F;
+    }
+    .thumbnail-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* ===== Condition & Quality Selector ===== */
+    .condition-chip {
+        padding: 8px 16px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        background: #fff;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        user-select: none;
+    }
+    .condition-chip:hover {
+        border-color: #D32F2F;
+        color: #D32F2F;
+    }
+    .condition-chip.active {
+        background: #fef2f2;
+        border-color: #D32F2F;
+        color: #D32F2F;
+        box-shadow: 0 2px 8px rgba(211, 47, 47, 0.15);
+    }
+
+    /* ===== Quantity Selector ===== */
+    .qty-btn {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+    }
+    .qty-btn:hover {
+        background: #e2e8f0;
+    }
+    .qty-input {
+        width: 55px;
+        height: 38px;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+        font-weight: 700;
+        color: #0f172a;
+        background: #fff;
+    }
+    .qty-input:focus {
+        outline: none;
+    }
+
+    /* ===== Action Buttons ===== */
+    .btn-buy-now {
+        background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+        box-shadow: 0 4px 14px rgba(211, 47, 47, 0.35);
+    }
+    .btn-buy-now:hover {
+        background: linear-gradient(135deg, #B71C1C 0%, #991b1b 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(211, 47, 47, 0.45);
+    }
+    .btn-add-cart {
+        background: #fff;
+        border: 2px solid #D32F2F;
+        color: #D32F2F;
+    }
+    .btn-add-cart:hover {
+        background: #fef2f2;
+    }
+
+    /* ===== Tabs ===== */
+    .tab-btn {
+        padding: 14px 24px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #64748b;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    .tab-btn:hover {
+        color: #D32F2F;
+    }
+    .tab-btn.active {
+        color: #D32F2F;
+        border-bottom-color: #D32F2F;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+        animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Badges & Features ===== */
+    .feature-badge {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    }
+    .badge-oem-pill {
+        background: #0f172a;
+        color: #f8fafc;
+        font-family: monospace;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+    .stock-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: #ecfdf5;
+        color: #059669;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+    .stock-badge.low {
+        background: #fff7ed;
+        color: #ea580c;
+    }
+ 
