@@ -36,3 +36,13 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # تشغيل أوامر Laravel الأساسية عند الإقلاع
 CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && apache2-foreground
+# ... (الكود السابق)
+
+# إعطاء صلاحيات لمجلدات التخزين
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# ✅ إنشاء اختصار التخزين (Storage Symlink)
+RUN php artisan storage:link
+
+# تشغيل أوامر Laravel الأساسية عند الإقلاع
+CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && apache2-foreground
