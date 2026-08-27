@@ -144,15 +144,38 @@
         </div>
 
         
-                <!-- 3. Desktop Categories Menu -->
+               <!-- 3. Desktop Categories Menu -->
         <nav class="bg-brandDark-200 text-white hidden md:block border-t border-white/10">
             <div class="max-w-7xl mx-auto px-8 flex items-center gap-8 text-sm font-medium h-11">
                 <a href="{{ route('home') }}" class="text-amber-400 font-bold border-b-2 border-khaled py-2.5">Accueil</a>
                 
                 @foreach(\App\Models\Category::all() as $category)
-                    <a href="{{ route('category.show', $category->id) }}" class="hover:text-amber-400 transition py-2.5">
-                        {{ $category->name }}
-                    </a>
+                    <div class="relative group py-2.5 cursor-pointer">
+                        <a href="{{ route('category.show', $category->id) }}" class="hover:text-amber-400 flex items-center gap-1 transition">
+                            {{ $category->name }} <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                        </a>
+                        
+                        {{-- القائمة المنسدلة التي تبحث في قاعدة البيانات عن الأنواع (Type) المرتبطة بهذا الصنف --}}
+                        <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
+                            @php
+                                // جلب الأنواع (Type) الفريدة المرتبطة بالمنتجات في هذا الصنف
+                                $types = \App\Models\Product::where('category_id', $category->id)
+                                                            ->whereNotNull('type')
+                                                            ->distinct()
+                                                            ->pluck('type');
+                            @endphp
+                            
+                            @if($types->count() > 0)
+                                @foreach($types as $type)
+                                    <a href="{{ route('products.byType', $type) }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">
+                                        {{ $type }}
+                                    </a>
+                                @endforeach
+                            @else
+                                <span class="block py-1.5 px-2 text-xs text-gray-400">Aucun sous-type</span>
+                            @endif
+                        </div>
+                    </div>
                 @endforeach
 
                 <a href="#" class="ml-auto bg-khaled text-white text-xs px-3.5 py-1 rounded-full font-bold hover:bg-khaled-dark transition">
