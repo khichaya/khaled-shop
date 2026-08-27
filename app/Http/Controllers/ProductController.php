@@ -13,7 +13,29 @@ class ProductController extends Controller
         $product->load('details');
         return view('products.show', compact('product'));
     }
+        // دالة البحث في المنتجات
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // البحث في الاسم، الرمز، الباركود، النوع، وأرقام الشاسيه
+        $products = Product::where('is_active', true)
+            ->where(function($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%")
+                  ->orWhere('sku', 'LIKE', "%{$query}%")
+                  ->orWhere('barcode', 'LIKE', "%{$query}%")
+                  ->orWhere('type', 'LIKE', "%{$query}%")
+                  ->orWhere('compatibility', 'LIKE', "%{$query}%");
+            })
+            ->latest()
+            ->paginate(12);
 
+        // إعادة استخدام واجهة الأصناف لعرض نتائج البحث
+        return view('category', [
+            'category' => (object)['name' => 'Résultats pour: "' . $query . '"'],
+            'products' => $products
+        ]);
+    }
     // ✅ دالة الفلترة حسب النوع (Type) - هي التي تسبب الخطأ إذا كانت ناقصة
     public function byType($type)
     {

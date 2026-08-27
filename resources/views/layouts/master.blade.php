@@ -81,14 +81,14 @@
 
                 <!-- Search Bar -->
                 <div class="hidden md:flex flex-1 max-w-md mx-8">
-                    <form action="#" method="GET" class="w-full relative">
-                        <input type="text" name="query" placeholder="Rechercher par réf, code OEM, marque (Toyota, Renault...)" 
-                               class="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-khaled focus:bg-white transition shadow-inner">
-                        <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-khaled">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                </div>
+    <form action="{{ route('products.search') }}" method="GET" class="w-full relative">
+        <input type="text" name="query" placeholder="Rechercher par réf, code OEM, marque (Toyota, Renault...)" 
+               class="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-khaled focus:bg-white transition shadow-inner">
+        <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-khaled">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+</div>
 
                 <!-- User & Cart Actions -->
                 <div class="flex items-center gap-4">

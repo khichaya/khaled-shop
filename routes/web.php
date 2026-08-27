@@ -57,7 +57,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/sync-product', [ProductSyncController::class, 'sync']);
     Route::post('/delete-product', [ProductSyncController::class, 'destroy']);
 });
-
+// مسار البحث في الموقع
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 // مسار مؤقت لتوليد توكن (احذفه بعد الحصول على التوكن)
 Route::get('/generate-token', function () {
     $user = App\Models\User::firstOrCreate(
