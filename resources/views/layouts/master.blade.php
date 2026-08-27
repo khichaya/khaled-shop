@@ -143,62 +143,17 @@
             </div>
         </div>
 
-        <!-- 3. Desktop Categories Menu -->
+        
+                <!-- 3. Desktop Categories Menu -->
         <nav class="bg-brandDark-200 text-white hidden md:block border-t border-white/10">
             <div class="max-w-7xl mx-auto px-8 flex items-center gap-8 text-sm font-medium h-11">
                 <a href="{{ route('home') }}" class="text-amber-400 font-bold border-b-2 border-khaled py-2.5">Accueil</a>
                 
-                <!-- Filtration & Vidange -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Filtration & Huiles <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtres à huile & carburant</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtres à air & habitacle</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Huiles moteur & transmissions</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Liquides de frein & refroidissement</a>
-                    </div>
-                </div>
-
-                <!-- Freinage & Suspension -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Freinage & Suspension <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Plaquettes & disques de frein</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Amortisseurs & ressorts</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Rotules & bras de suspension</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits roulements de roue</a>
-                    </div>
-                </div>
-
-                <!-- Moteur & Distribution -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Moteur & Embrayage <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits de distribution & courroies</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits d'embrayage & volants moteur</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Bougies d'allumage & préchauffage</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Pompes à eau & thermostats</a>
-                    </div>
-                </div>
-
-                <!-- Électricité & Éclairage -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Électricité & Capteurs <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Batteries & alternateurs</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Démarreurs</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Capteurs & sondes (MAF, Lambda...)</a>
-                        <a href="#" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Optiques de phares & ampoules</a>
-                    </div>
-                </div>
+                @foreach(\App\Models\Category::all() as $category)
+                    <a href="{{ route('category.show', $category->id) }}" class="hover:text-amber-400 transition py-2.5">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
 
                 <a href="#" class="ml-auto bg-khaled text-white text-xs px-3.5 py-1 rounded-full font-bold hover:bg-khaled-dark transition">
                     Promotions & Arrivages 🏷️

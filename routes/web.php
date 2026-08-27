@@ -6,7 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +37,7 @@ Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('c
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
 // مسارات الملف الشخصي (تسجيل الدخول والطلبات)
 Route::middleware('auth')->group(function () {
     // مسار Breeze لتعديل الملف الشخصي
