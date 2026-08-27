@@ -7,7 +7,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\Api\ProductSyncController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,12 +52,12 @@ Route::middleware('auth')->group(function () {
     // ✅ مسارنا لعرض طلبات الزبون
     Route::get('/mon-compte', [ProfileController::class, 'index'])->name('profile.index');
 });
-// مسارات API للمزامنة
-Route::middleware('auth:sanctum')->post('/api/sync-product', [App\Http\Controllers\Api\ProductSyncController::class, 'sync']);
-Route::middleware('auth:sanctum')->post('/delete-product', [App\Http\Controllers\Api\ProductSyncController::class, 'destroy']);
+// مسارات المزامنة (لا تتطلب CSRF لأنها API)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/sync-product', [ProductSyncController::class, 'sync']);
+    Route::post('/delete-product', [ProductSyncController::class, 'destroy']);
+});
 
-// مسارات API للمزامنة
-Route::middleware('auth:sanctum')->post('/delete-product', [App\Http\Controllers\Api\ProductSyncController::class, 'destroy']);
 // مسار مؤقت لتوليد توكن (احذفه بعد الحصول على التوكن)
 Route::get('/generate-token', function () {
     $user = App\Models\User::firstOrCreate(
