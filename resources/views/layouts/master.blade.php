@@ -149,34 +149,55 @@
             <div class="max-w-7xl mx-auto px-8 flex items-center gap-8 text-sm font-medium h-11">
                 <a href="{{ route('home') }}" class="text-amber-400 font-bold border-b-2 border-khaled py-2.5">Accueil</a>
                 
-                @foreach(\App\Models\Category::all() as $category)
-                    <div class="relative group py-2.5 cursor-pointer">
-                        <a href="{{ route('category.show', $category->id) }}" class="hover:text-amber-400 flex items-center gap-1 transition">
-                            {{ $category->name }} <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                        </a>
-                        
-                        {{-- القائمة المنسدلة التي تبحث في قاعدة البيانات عن الأنواع (Type) المرتبطة بهذا الصنف --}}
-                        <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                            @php
-                                // جلب الأنواع (Type) الفريدة المرتبطة بالمنتجات في هذا الصنف
-                                $types = \App\Models\Product::where('category_id', $category->id)
-                                                            ->whereNotNull('type')
-                                                            ->distinct()
-                                                            ->pluck('type');
-                            @endphp
-                            
-                            @if($types->count() > 0)
-                                @foreach($types as $type)
-                                    <a href="{{ route('products.byType', $type) }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">
-                                        {{ $type }}
-                                    </a>
-                                @endforeach
-                            @else
-                                <span class="block py-1.5 px-2 text-xs text-gray-400">Aucun sous-type</span>
-                            @endif
-                        </div>
+                <!-- 1. Filtration & Huiles -->
+                <div class="relative group py-2.5 cursor-pointer">
+                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
+                        Filtration & Huiles <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </span>
+                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
+                        <a href="{{ route('products.byType', 'Filtre à huile & carburant') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtre à huile & carburant</a>
+                        <a href="{{ route('products.byType', 'Filtre à air & habitacle') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtre à air & habitacle</a>
+                        <a href="{{ route('products.byType', 'Huiles moteur & transmissions') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Huiles moteur & transmissions</a>
                     </div>
-                @endforeach
+                </div>
+
+                <!-- 2. Freinage & Suspension -->
+                <div class="relative group py-2.5 cursor-pointer">
+                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
+                        Freinage & Suspension <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </span>
+                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
+                        <a href="{{ route('products.byType', 'Plaquettes & disques de frein') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Plaquettes & disques de frein</a>
+                        <a href="{{ route('products.byType', 'Amortisseurs & ressorts') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Amortisseurs & ressorts</a>
+                        <a href="{{ route('products.byType', 'Rotules & bras de suspension') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Rotules & bras de suspension</a>
+                    </div>
+                </div>
+
+                <!-- 3. Moteur & Embrayage -->
+                <div class="relative group py-2.5 cursor-pointer">
+                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
+                        Moteur & Embrayage <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </span>
+                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
+                        <a href="{{ route('products.byType', 'Kits de distribution & courroies') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits de distribution & courroies</a>
+                        <a href="{{ route('products.byType', 'Kits d\'embrayage & volants moteur') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits d'embrayage & volants moteur</a>
+                        <a href="{{ route('products.byType', 'Bougies d\'allumage & préchauffage') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Bougies d'allumage & préchauffage</a>
+                        <a href="{{ route('products.byType', 'Pompes à eau & thermostats') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Pompes à eau & thermostats</a>
+                    </div>
+                </div>
+
+                <!-- 4. Électricité & Capteurs -->
+                <div class="relative group py-2.5 cursor-pointer">
+                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
+                        Électricité & Capteurs <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </span>
+                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
+                        <a href="{{ route('products.byType', 'Batteries & alternateurs') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Batteries & alternateurs</a>
+                        <a href="{{ route('products.byType', 'Démarreurs') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Démarreurs</a>
+                        <a href="{{ route('products.byType', 'Capteurs & sondes (MAF, Lambda...)') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Capteurs & sondes (MAF, Lambda...)</a>
+                        <a href="{{ route('products.byType', 'Optiques de phares & ampoules') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Optiques de phares & ampoules</a>
+                    </div>
+                </div>
 
                 <a href="#" class="ml-auto bg-khaled text-white text-xs px-3.5 py-1 rounded-full font-bold hover:bg-khaled-dark transition">
                     Promotions & Arrivages 🏷️

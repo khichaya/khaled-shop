@@ -42,8 +42,7 @@ Route::get('/dashboard', function () {
 
 
 // مسار الفلترة حسب النوع (Type)
-Route::get('/type/{type}', [ProductController::class, 'byType'])->name('products.byType');
-// مسارات الملف الشخصي (تسجيل الدخول والطلبات)
+Route::get('/type/{type}', [ProductController::class, 'byType'])->name('products.byType');// مسارات الملف الشخصي (تسجيل الدخول والطلبات)
 Route::middleware('auth')->group(function () {
     // مسار Breeze لتعديل الملف الشخصي
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
