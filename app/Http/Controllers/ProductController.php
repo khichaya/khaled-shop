@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // عرض صفحة منتج واحد (تفاصيل المنتج)
     public function show(Product $product)
     {
-        $product->load(['category', 'details']);
+        $product->load('details');
         return view('products.show', compact('product'));
     }
-        // دالة الفلترة حسب النوع (Type)
+
+    // ✅ دالة الفلترة حسب النوع (Type) - هي التي تسبب الخطأ إذا كانت ناقصة
     public function byType($type)
     {
         $products = Product::where('type', $type)

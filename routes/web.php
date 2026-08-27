@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // المنتجات (صفحة التفاصيل)
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
 
 // السلة (Cart)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -51,6 +53,9 @@ Route::middleware('auth')->group(function () {
     // ✅ مسارنا لعرض طلبات الزبون
     Route::get('/mon-compte', [ProfileController::class, 'index'])->name('profile.index');
 });
+// مسارات API للمزامنة
+Route::middleware('auth:sanctum')->post('/api/sync-product', [App\Http\Controllers\Api\ProductSyncController::class, 'sync']);
+Route::middleware('auth:sanctum')->post('/delete-product', [App\Http\Controllers\Api\ProductSyncController::class, 'destroy']);
 
 // مسارات API للمزامنة
 Route::middleware('auth:sanctum')->post('/delete-product', [App\Http\Controllers\Api\ProductSyncController::class, 'destroy']);
