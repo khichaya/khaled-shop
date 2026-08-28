@@ -72,7 +72,7 @@ class CheckoutController extends Controller
 
         // ✅ إرسال الطلب إلى الـ POS المحلي (المزامنة العكسية)
         // ✅ إرسال الطلب مباشرة (Sync) لضمان وصوله الفوري
-        \App\Jobs\SyncOrderToPosJob::dispatch($order);
+        \App\Jobs\SyncOrderToPosJob::dispatchSync($order);
 
         return redirect()->route('checkout.success');
     }
