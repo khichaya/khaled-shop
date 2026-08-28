@@ -45,8 +45,8 @@ class CheckoutController extends Controller
         }
 
         // إنشاء الطلب
-        $order = Order::create([
-            'user_id' => auth()->id(), // ✅ ربط الطلب بحساب الزبون
+                $order = Order::create([
+            'user_id' => auth()->id(),
             'order_number' => 'ORD-' . strtoupper(uniqid()),
             'total_amount' => $total,
             'status' => 'pending',

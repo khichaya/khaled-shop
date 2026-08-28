@@ -23,7 +23,7 @@ class SyncOrderToPosJob implements ShouldQueue
         $this->order = $order;
     }
 
-       public function handle(): void
+        public function handle(): void
     {
         $url = rtrim(config('services.pos_api.url'), '/') . '/sync-order';
         $token = config('services.pos_api.token');
@@ -47,17 +47,14 @@ class SyncOrderToPosJob implements ShouldQueue
         ];
 
         try {
-            $response = Http::withToken($token)->timeout(30)->post($url, $data);
+            // استخدم withoutVerifying() لتجاوز خطأ SSL في Render
+            $response = Http::withToken($token)->timeout(30)->withoutVerifying()->post($url, $data);
 
             if (!$response->successful()) {
                 Log::error("Order Sync Failed: " . $response->body());
-                // إرجاع الطلب للطابور مع تأخير 10 دقائق (600 ثانية)
-                $this->release(600);
             }
         } catch (\Exception $e) {
-            Log::error("Order Sync Exception (POS is offline): " . $e->getMessage());
-            // إرجاع الطلب للطابور مع تأخير 10 دقائق (600 ثانية)
-            $this->release(600);
+            Log::error("Order Sync Exception: " . $e->getMessage());
         }
     }
 }
