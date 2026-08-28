@@ -37,15 +37,17 @@
                         
                         <div class="flex items-center gap-4">
                             <div class="text-right">
-                                @if($order->status == 'pending')
+                                                                @if($order->status == 'pending')
                                     <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">En attente</span>
                                 @elseif($order->status == 'processing')
-                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">En traitement</span>
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">Validé / En traitement</span>
+                                @elseif($order->status == 'shipped')
+                                    <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">En route</span>
                                 @elseif($order->status == 'completed')
                                     <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Livrée</span>
                                 @else
                                     <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Annulée</span>
-                                @endif>
+                                @endif
                                 <p class="text-xs text-gray-500 mt-2">{{ $order->items->count() }} article(s)</p>
                             </div>
                         </div>

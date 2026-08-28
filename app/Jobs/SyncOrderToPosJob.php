@@ -16,13 +16,14 @@ class SyncOrderToPosJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $order;
-
+    public $tries = 0; // محاولات غير محدودة
+    public $backoff = 600; // الانتظار 10 دقائق بين كل محاولة فاشلة
     public function __construct(Order $order)
     {
         $this->order = $order;
     }
 
-    public function handle(): void
+       public function handle(): void
     {
         $url = rtrim(config('services.pos_api.url'), '/') . '/sync-order';
         $token = config('services.pos_api.token');
@@ -50,9 +51,13 @@ class SyncOrderToPosJob implements ShouldQueue
 
             if (!$response->successful()) {
                 Log::error("Order Sync Failed: " . $response->body());
+                // إرجاع الطلب للطابور مع تأخير 10 دقائق (600 ثانية)
+                $this->release(600);
             }
         } catch (\Exception $e) {
-            Log::error("Order Sync Exception: " . $e->getMessage());
+            Log::error("Order Sync Exception (POS is offline): " . $e->getMessage());
+            // إرجاع الطلب للطابور مع تأخير 10 دقائق (600 ثانية)
+            $this->release(600);
         }
     }
 }
