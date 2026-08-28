@@ -25,7 +25,6 @@ class CheckoutController extends Controller
     }
 
     // حفظ الطلب في قاعدة البيانات
-      // حفظ الطلب في قاعدة البيانات
     public function store(Request $request)
     {
         $request->validate([
@@ -47,7 +46,7 @@ class CheckoutController extends Controller
 
         // إنشاء الطلب
         $order = Order::create([
-            'user_id' => auth()->id(), // ✅ هذا هو السطر الناقص الذي يربط الطلب بحسابك!
+            'user_id' => auth()->id(), // ✅ ربط الطلب بحساب الزبون
             'order_number' => 'ORD-' . strtoupper(uniqid()),
             'total_amount' => $total,
             'status' => 'pending',
@@ -70,6 +69,10 @@ class CheckoutController extends Controller
 
         // تفريغ السلة
         session()->forget('cart');
+
+        // ✅ إرسال الطلب إلى الـ POS المحلي (المزامنة العكسية)
+        // ✅ إرسال الطلب مباشرة (Sync) لضمان وصوله الفوري
+        \App\Jobs\SyncOrderToPosJob::dispatchSync($order);
 
         return redirect()->route('checkout.success');
     }
