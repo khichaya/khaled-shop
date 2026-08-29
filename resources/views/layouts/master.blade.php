@@ -211,16 +211,17 @@
         @yield('content')
     </main>
 
-    <!-- 4. Mobile Bottom Navigation -->
+    
+       <!-- 4. Mobile Bottom Navigation -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2.5 px-4 flex justify-around items-center z-50 shadow-lg">
+        
+        <!-- الرئيسية -->
         <a href="{{ route('home') }}" class="flex flex-col items-center text-khaled">
             <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px] font-bold mt-0.5">Accueil</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-500 hover:text-khaled">
-            <i class="fa-solid fa-list-ul text-lg"></i>
-            <span class="text-[10px] mt-0.5">Rayons</span>
-        </a>
+
+        <!-- السلة -->
         <a href="{{ route('cart.index') }}" class="flex flex-col items-center text-gray-500 hover:text-khaled relative">
             <i class="fa-solid fa-cart-shopping text-lg"></i>
             <span class="text-[10px] mt-0.5">Panier</span>
@@ -229,17 +230,63 @@
                 <span class="absolute -top-1 -right-2 bg-khaled text-white text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center">{{ $cart_count }}</span>
             @endif
         </a>
-        @auth
-            <a href="{{ route('profile.index') }}" class="flex flex-col items-center text-gray-500 hover:text-khaled">
-                <i class="fa-solid fa-user text-lg"></i>
+
+        <!-- القائمة (للبحث عن منتج) -->
+        <a href="#" onclick="document.getElementById('mobile-search-btn').click();" class="flex flex-col items-center text-gray-500 hover:text-khaled">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+            <span class="text-[10px] mt-0.5">Recherche</span>
+        </a>
+
+        <!-- حسابي (قائمة منسدلة) -->
+        <div class="relative group">
+            <button class="flex flex-col items-center text-gray-500 hover:text-khaled focus:outline-none">
+                <i class="fa-regular fa-user text-lg"></i>
                 <span class="text-[10px] mt-0.5">Compte</span>
-            </a>
-        @else
-            <a href="{{ route('login') }}" class="flex flex-col items-center text-gray-500 hover:text-khaled">
-                <i class="fa-solid fa-right-to-bracket text-lg"></i>
-                <span class="text-[10px] mt-0.5">Login</span>
-            </a>
-        @endauth
+            </button>
+            
+            <!-- القائمة المنسدلة للأيقونة -->
+            <div class="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 overflow-hidden">
+                @auth
+                    <a href="{{ route('profile.index') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled border-b border-gray-50">
+                        <i class="fa-solid fa-box mr-2"></i> Mes Commandes
+                    </a>
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled">
+                        <i class="fa-solid fa-user-gear mr-2"></i> Mon Profil
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 border-t border-gray-50">
+                            <i class="fa-solid fa-right-from-bracket mr-2"></i> Déconnexion
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled border-b border-gray-50">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Connexion
+                    </a>
+                    <a href="{{ route('register') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled">
+                        <i class="fa-solid fa-user-plus mr-2"></i> S'inscrire (Nouveau)
+                    </a>
+                @endauth
+            </div>
+        </div>
+        
+        {{-- زر مخفي لتشغيل البحث عند الضغط على أيقونة البحث --}}
+        <button id="mobile-search-btn" type="button" class="hidden" data-bs-toggle="modal" data-bs-target="#mobileSearchModal"></button>
+
+    </div>
+
+    <!-- نافذة البحث المنبثقة للهاتف -->
+    <div class="modal fade md:hidden" id="mobileSearchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-0 min-h-screen flex items-start p-4">
+                <form action="{{ route('products.search') }}" method="GET" class="w-full mt-4">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control border-2 border-gray-200 rounded-l-full py-3" placeholder="Rechercher une pièce...">
+                        <button class="btn bg-khaled text-white rounded-r-full px-4" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- 5. Footer -->
