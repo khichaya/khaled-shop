@@ -79,17 +79,16 @@ class ProductSyncController extends Controller
         }
 
                  // استلام الصورة الرئيسية
+                // استلام الصورة الرئيسية (الطريقة القياسية لـ Hostinger)
         if ($request->hasFile('image_file')) {
-            // حذف الصورة القديمة إذا وجدت
             if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
             
-           // ✅ الحفظ مباشرة في مجلد public/images/products (بدون استخدام storage)
-            $file->move(public_path('images/products'), $filename);
-            $product->image = 'images/products/' . $filename;
+            // ✅ الحفظ في storage/app/public/products
+            $path = $request->file('image_file')->store('products', 'public');
+            $product->image = $path;
         }
-
         $product->save();
 
         if ($request->has('details_content')) {

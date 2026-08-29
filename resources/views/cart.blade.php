@@ -21,7 +21,7 @@
                     <div class="flex items-center gap-4 p-4 border-b">
                         <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             @if($item['image'])
-                                <img src="{{ asset($product->image) }}" class="w-full h-full object-contain rounded-lg">
+                                <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-contain rounded-lg">
                             @else
                                 <i class="bi bi-gear text-2xl text-gray-300"></i>
                             @endif
