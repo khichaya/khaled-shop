@@ -40,7 +40,7 @@
     <!-- Logo et Identité Visuelle -->
     <div class="mb-8">
         <a href="{{ route('home') }}" class="flex flex-col items-center gap-2">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Khaled Auto Pièces" class="w-16 h-16 object-contain">
+            <img src="{{ asset('Images/logo.png') }}" alt="Logo Khaled Auto Pièces" class="w-16 h-16 object-contain">
             <div class="flex flex-col items-center border-l-2 border-khaled pl-3">
                 <span class="text-base font-extrabold text-gray-900 leading-tight">KHALED AUTO PIÈCES</span>
                 <span class="text-[10px] text-gray-500 font-semibold">Espace Client</span>
