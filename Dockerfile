@@ -1,4 +1,4 @@
-# استخدام PHP 8.4 بدلاً من 8.2
+# استخدام PHP 8.4
 FROM php:8.4-apache
 
 # تثبيت حزم النظام وامتدادات PHP المطلوبة لـ Laravel
@@ -34,15 +34,8 @@ RUN a2enmod rewrite
 # إعطاء صلاحيات لمجلدات التخزين
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# تشغيل أوامر Laravel الأساسية عند الإقلاع
-CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && apache2-foreground
-# ... (الكود السابق)
-
-# إعطاء صلاحيات لمجلدات التخزين
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# ✅ إنشاء اختصار التخزين (Storage Symlink)
-RUN php artisan storage:link
+# ✅ إنشاء اختصار التخزين (Symlink) يدوياً (أكثر استقراراً من artisan)
+RUN ln -s /var/www/html/storage/app/public /var/www/html/public/storage
 
 # تشغيل أوامر Laravel الأساسية عند الإقلاع
 CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && apache2-foreground
