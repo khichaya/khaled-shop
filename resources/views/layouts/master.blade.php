@@ -51,7 +51,7 @@
     <div class="bg-brandDark-200 text-white text-xs py-2 px-4 text-center flex justify-between items-center md:px-8 border-b border-white/10">
         <div class="hidden md:flex items-center gap-4 text-gray-300">
             <span><i class="fa-solid fa-location-dot text-khaled mr-1"></i> bab ezzouar, W. Alger</span>
-            <span><i class="fa-solid fa-phone text-khaled mr-1"></i> Contact: +213 (0) 600 00 00 00</span>
+            <span><i class="fa-solid fa-phone text-khaled mr-1"></i> Contact: +213 (0) 780 56 24 45</span>
         </div>
         <div class="w-full md:w-auto text-center font-medium text-amber-400">
             🚚 Livraison express vers 58 wilayas | Retrait direct disponible au magasin

@@ -5,7 +5,7 @@
 @section('content')
 <!-- 1. Hero Banner Principal avec Image d'Arrière-plan Claire -->
 <section class="relative text-white overflow-hidden border-b border-white/10 bg-cover bg-center bg-no-repeat"
-         style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
+         style="background-image: url('{{ asset('Images/hero-bg.jpg') }}');">
     
     <!-- تخفيف التظليل ليكون شفافاً وخفيفاً فقط خلف النصوص -->
     <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent"></div>
@@ -25,7 +25,7 @@
                 <a href="#products" class="bg-khaled hover:bg-khaled-dark text-white font-bold px-6 py-3 rounded-full shadow-xl transition text-sm flex items-center gap-2">
                     <i class="fa-solid fa-list-check"></i> Parcourir le catalogue
                 </a>
-                <a href="https://wa.me/213000000000" class="bg-brandDark-200/80 hover:bg-brandDark-200 text-white font-medium px-6 py-3 rounded-full border border-white/30 transition text-sm flex items-center gap-2 backdrop-blur-sm shadow-lg" target="_blank">
+                <a href="https://wa.me/213780562445" class="bg-brandDark-200/80 hover:bg-brandDark-200 text-white font-medium px-6 py-3 rounded-full border border-white/30 transition text-sm flex items-center gap-2 backdrop-blur-sm shadow-lg" target="_blank">
                     <i class="fa-brands fa-whatsapp text-green-400 text-base"></i> Commander via WhatsApp
                 </a>
             </div>
