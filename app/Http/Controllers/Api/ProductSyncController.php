@@ -78,10 +78,14 @@ class ProductSyncController extends Controller
             $product->supplier_id = $supplier->id ?? null;
         }
 
+                 // استلام الصورة الرئيسية
         if ($request->hasFile('image_file')) {
+            // حذف الصورة القديمة إذا وجدت
             if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
+            
+            // ✅ الحفظ في storage/app/public/products (الطريقة القياسية المتوافقة مع Render)
             $path = $request->file('image_file')->store('products', 'public');
             $product->image = $path;
         }
