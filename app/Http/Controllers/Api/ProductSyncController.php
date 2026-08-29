@@ -85,9 +85,9 @@ class ProductSyncController extends Controller
                 Storage::disk('public')->delete($product->image);
             }
             
-            // ✅ الحفظ في storage/app/public/products (الطريقة القياسية المتوافقة مع Render)
-            $path = $request->file('image_file')->store('products', 'public');
-            $product->image = $path;
+           // ✅ الحفظ مباشرة في مجلد public/images/products (بدون استخدام storage)
+            $file->move(public_path('images/products'), $filename);
+            $product->image = 'images/products/' . $filename;
         }
 
         $product->save();
