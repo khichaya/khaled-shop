@@ -14,25 +14,29 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
         // دالة البحث في المنتجات
+       // دالة البحث في المنتجات والتفاصيل
     public function search(Request $request)
     {
         $query = $request->input('query');
         
-        // البحث في الاسم، الرمز، الباركود، النوع، وأرقام الشاسيه
+        // البحث في جدول المنتجات وجدول التفاصيل (product_details) معاً
         $products = Product::where('is_active', true)
             ->where(function($q) use ($query) {
                 $q->where('name', 'LIKE', "%{$query}%")
                   ->orWhere('sku', 'LIKE', "%{$query}%")
                   ->orWhere('barcode', 'LIKE', "%{$query}%")
                   ->orWhere('type', 'LIKE', "%{$query}%")
-                  ->orWhere('compatibility', 'LIKE', "%{$query}%");
+                  ->orWhere('compatibility', 'LIKE', "%{$query}%")
+                  ->orWhereHas('details', function($detailQuery) use ($query) {
+                      $detailQuery->where('content', 'LIKE', "%{$query}%")
+                                  ->orWhere('title', 'LIKE', "%{$query}%");
+                  });
             })
             ->latest()
             ->paginate(12);
 
-        // إعادة استخدام واجهة الأصناف لعرض نتائج البحث
-        return view('category', [
-            'category' => (object)['name' => 'Résultats pour: "' . $query . '"'],
+        // إعادة استخدام واجهة الأصناف/الكتالوج لعرض نتائج البحث
+        return view('catalog', [
             'products' => $products
         ]);
     }

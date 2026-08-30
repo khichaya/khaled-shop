@@ -6,7 +6,13 @@
 <section class="max-w-7xl mx-auto px-4 py-12">
     <div class="flex justify-between items-end mb-8">
         <div>
-            <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Catalogue Complet des Pièces</h2>
+            <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">
+                @if(request()->has('query'))
+                    Résultats pour : "{{ request('query') }}"
+                @else
+                    Catalogue Complet des Pièces
+                @endif
+            </h2>
             <p class="text-xs text-gray-500 mt-1">Parcourez l'ensemble de notre stock de pièces détachées.</p>
         </div>
     </div>
