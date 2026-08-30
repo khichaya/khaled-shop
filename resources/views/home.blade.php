@@ -3,14 +3,21 @@
 @section('title', 'Khaled Auto Pièces | Vente de Pièces Détachées & Accessoires Auto')
 
 @section('content')
-<!-- 1. Hero Banner Principal avec Image d'Arrière-plan Claire -->
-<section class="relative text-white overflow-hidden border-b border-white/10 bg-cover bg-center bg-no-repeat"
-         style="background-image: url('{{ asset('Images/hero-bg.jpg') }}');">
+<!-- 1. Hero Banner Principal avec Vidéo d'Arrière-plan -->
+<section class="relative text-white overflow-hidden border-b border-white/10 min-h-[500px] md:min-h-[600px] flex items-center">
     
-    <!-- تخفيف التظليل ليكون شفافاً وخفيفاً فقط خلف النصوص -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent"></div>
+    <!-- ✅ خلفية الفيديو (MP4) -->
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+        <!-- مسار الفيديو: تأكد من وضع الفيديو في public/videos/hero-bg.mp4 -->
+        <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
+        <!-- صورة بديلة تظهر إذا كان المتصفح لا يدعم الفيديو أو قبل تحميله -->
+        <img src="{{ asset('Images/hero-bg.jpg') }}" alt="Fallback" class="w-full h-full object-cover">
+    </video>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center justify-between gap-8">
+    <!-- تخفيف التظليل ليكون شفافاً وخفيفاً فقط خلف النصوص (تم وضعه فوق الفيديو) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10 z-10"></div>
+
+    <div class="relative z-20 max-w-7xl mx-auto px-4 py-16 md:py-24 w-full flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="space-y-4 max-w-xl text-center md:text-left">
             <span class="inline-block bg-khaled text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-md">
                 Nouvel Arrivage & Pièces d'Origine ✨
