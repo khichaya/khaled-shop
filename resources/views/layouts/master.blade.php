@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Khaled Auto Pièces | Vente de Pièces Détachées & Accessoires')</title>
+        <!-- ✅ أكواد Open Graph لظهور الصورة المصغرة في واتساب وفيسبوك -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://khaled-auto-shop.onrender.com" />
+    <meta property="og:title" content="Khaled Auto Pièces | Pièces Détachées & Accessoires Auto" />
+    <meta property="og:description" content="Spécialiste de la vente de pièces détachées d'origine et adaptables pour véhicules légers et utilitaires. Livraison rapide vers 58 wilayas." />
     
+    {{-- الصورة المصغرة (يفضل أن تكون بمقاس 1200x630 بكسل) --}}
+    <meta property="og:image" content="{{ asset('Images/whatsapp-thumb.jpg') }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Khaled Auto Pièces" />
+
+    <!-- ✅ أكواد Twitter Cards (لتظهر بشكل ممتاز في تويتر أيضاً) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Khaled Auto Pièces" />
+    <meta name="twitter:description" content="Pièces détachées d'origine et adaptables. Livraison 58 wilayas." />
+    <meta name="twitter:image" content="{{ asset('Images/whatsapp-thumb.jpg') }}" />
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome & Bootstrap Icons -->
