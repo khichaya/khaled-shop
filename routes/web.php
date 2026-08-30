@@ -20,7 +20,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // المنتجات (صفحة التفاصيل)
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
-
+Route::get('/catalog', [ProductController::class, 'catalog'])->name('catalog');
 // السلة (Cart)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

@@ -50,4 +50,10 @@ class ProductController extends Controller
             'products' => $products
         ]);
     }
+        // دالة عرض الكتالوج الكامل مع التقسيم
+    public function catalog()
+    {
+        $products = Product::where('is_active', true)->latest()->paginate(12);
+        return view('catalog', compact('products'));
+    }
 }

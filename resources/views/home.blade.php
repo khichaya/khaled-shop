@@ -82,7 +82,7 @@
                 <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Pièces Récentes & Recommandées</h2>
                 <p class="text-xs text-gray-500 mt-1">Trouvez rapidement la référence compatible avec votre véhicule</p>
             </div>
-            <a href="#" class="text-khaled font-bold text-sm hover:underline flex items-center gap-1">
+            <a href="{{ route('catalog') }}" class="text-khaled font-bold text-sm hover:underline flex items-center gap-1">
                 Voir tout le catalogue <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
         </div>
