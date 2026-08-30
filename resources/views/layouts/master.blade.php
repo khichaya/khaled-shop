@@ -95,7 +95,7 @@
                     </a>
                 </div>
 
-                <!-- Search Bar & Brand Logos -->
+                               <!-- Search Bar & Brand Logos -->
                 <div class="hidden md:flex flex-col flex-1 max-w-md mx-8">
                     <form action="{{ route('products.search') }}" method="GET" class="w-full relative mb-2">
                         <input type="text" name="query" placeholder="Rechercher par réf, code OEM, marque (Toyota, Renault...)" 
@@ -105,9 +105,7 @@
                         </button>
                     </form>
                     
-                  
-                                        <!-- ✅ شعارات ماركات السيارات (مكبرة) -->
-                                        <!-- ✅ شعارات ماركات السيارات (مكبرة و قابلة للنقر) -->
+                    <!-- ✅ شعارات ماركات السيارات (للحاسوب) -->
                     <div class="flex items-center gap-8 justify-center pt-1">
                         <a href="{{ route('products.search', ['query' => 'Toyota']) }}" class="block" title="Pièces Toyota">
                             <img src="{{ asset('Images/brands/toyota.png') }}" alt="Toyota" class="h-8 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer">
@@ -239,7 +237,21 @@
             </div>
         </nav>
     </header>
-
+    <!-- ✅ شريط ماركات السيارات للهواتف المحمولة -->
+    <div class="md:hidden bg-white border-b border-gray-100 py-2 px-4 flex items-center justify-around shadow-sm">
+        <a href="{{ route('products.search', ['query' => 'Toyota']) }}" class="block" title="Pièces Toyota">
+            <img src="{{ asset('Images/brands/toyota.png') }}" alt="Toyota" class="h-7 object-contain opacity-60 active:opacity-100 transition cursor-pointer">
+        </a>
+        <a href="{{ route('products.search', ['query' => 'Nissan']) }}" class="block" title="Pièces Nissan">
+            <img src="{{ asset('Images/brands/nissan.png') }}" alt="Nissan" class="h-7 object-contain opacity-60 active:opacity-100 transition cursor-pointer">
+        </a>
+        <a href="{{ route('products.search', ['query' => 'Mitsubishi']) }}" class="block" title="Pièces Mitsubishi">
+            <img src="{{ asset('Images/brands/mitsubishi.png') }}" alt="Mitsubishi" class="h-7 object-contain opacity-60 active:opacity-100 transition cursor-pointer">
+        </a>
+        <a href="{{ route('products.search', ['query' => 'Daihatsu']) }}" class="block" title="Pièces Daihatsu">
+            <img src="{{ asset('Images/brands/daihatsu.png') }}" alt="Daihatsu" class="h-7 object-contain opacity-60 active:opacity-100 transition cursor-pointer">
+        </a>
+    </div>
     <!-- Dynamic Page Content -->
     <main class="flex-grow">
         @yield('content')
