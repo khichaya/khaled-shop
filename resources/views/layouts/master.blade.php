@@ -91,10 +91,10 @@
                     
                     <!-- ✅ شعارات ماركات السيارات -->
                     <div class="flex items-center gap-5 justify-center">
-                        <img src="{{ asset('images/brands/toyota.png') }}" alt="Toyota" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Toyota">
-                        <img src="{{ asset('images/brands/nissan.png') }}" alt="Nissan" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Nissan">
-                        <img src="{{ asset('images/brands/mitsubishi.png') }}" alt="Mitsubishi" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Mitsubishi">
-                        <img src="{{ asset('images/brands/daihatsu.png') }}" alt="Daihatsu" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Daihatsu">
+                        <img src="{{ asset('Images/brands/toyota.png') }}" alt="Toyota" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Toyota">
+                        <img src="{{ asset('Images/brands/nissan.png') }}" alt="Nissan" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Nissan">
+                        <img src="{{ asset('Images/brands/mitsubishi.png') }}" alt="Mitsubishi" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Mitsubishi">
+                        <img src="{{ asset('Images/brands/daihatsu.png') }}" alt="Daihatsu" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Daihatsu">
                     </div>
                 </div>
 
