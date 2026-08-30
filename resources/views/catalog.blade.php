@@ -99,6 +99,5 @@
         border-color: #D32F2F;
     }
 </style>
-@endsection
 </section>
 @endsection
