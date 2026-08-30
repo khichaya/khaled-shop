@@ -57,9 +57,48 @@
         @endforelse
     </div>
 
-    {{-- ✅ أزرار التنقل بين الصفحات (Pagination) --}}
-    <div class="mt-10 flex justify-center">
-        {{ $products->links() }}
+        {{-- ✅ أزرار التنقل بين الصفحات (Pagination) --}}
+    <div class="mt-10 w-full overflow-x-auto pb-4">
+        <div class="flex justify-center">
+            {{ $products->links() }}
+        </div>
     </div>
+</section>
+
+<style>
+    /* تنسيق أزرار التنقل بين الصفحات لتناسب هوية المتجر */
+    nav[role="navigation"] {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        margin-top: 10px;
+        flex-wrap: wrap; /* ✅ السماح للأزرار بالانتقال لسطر جديد في الهاتف */
+    }
+    nav[role="navigation"] a, 
+    nav[role="navigation"] span {
+        display: inline-block;
+        padding: 6px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-weight: 600;
+        color: #374151;
+        text-decoration: none;
+        transition: all 0.2s;
+        font-size: 14px;
+        white-space: nowrap; /* منع كسر النص داخل الزر */
+    }
+    nav[role="navigation"] a:hover {
+        background: #D32F2F;
+        color: #fff;
+        border-color: #D32F2F;
+    }
+    /* تنسيق الصفحة الحالية (Active) */
+    nav[role="navigation"] span[aria-current="page"] {
+        background: #D32F2F;
+        color: #fff;
+        border-color: #D32F2F;
+    }
+</style>
+@endsection
 </section>
 @endsection
