@@ -79,16 +79,24 @@
                     </a>
                 </div>
 
-                <!-- Search Bar -->
-                <div class="hidden md:flex flex-1 max-w-md mx-8">
-    <form action="{{ route('products.search') }}" method="GET" class="w-full relative">
-        <input type="text" name="query" placeholder="Rechercher par réf, code OEM, marque (Toyota, Renault...)" 
-               class="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-khaled focus:bg-white transition shadow-inner">
-        <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-khaled">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-    </form>
-</div>
+                <!-- Search Bar & Brand Logos -->
+                <div class="hidden md:flex flex-col flex-1 max-w-md mx-8">
+                    <form action="{{ route('products.search') }}" method="GET" class="w-full relative mb-2">
+                        <input type="text" name="query" placeholder="Rechercher par réf, code OEM, marque (Toyota, Renault...)" 
+                               class="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-khaled focus:bg-white transition shadow-inner">
+                        <button type="submit" class="absolute right-3 top-2.5 text-gray-400 hover:text-khaled">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- ✅ شعارات ماركات السيارات -->
+                    <div class="flex items-center gap-5 justify-center">
+                        <img src="{{ asset('images/brands/toyota.png') }}" alt="Toyota" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Toyota">
+                        <img src="{{ asset('images/brands/nissan.png') }}" alt="Nissan" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Nissan">
+                        <img src="{{ asset('images/brands/mitsubishi.png') }}" alt="Mitsubishi" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Mitsubishi">
+                        <img src="{{ asset('images/brands/daihatsu.png') }}" alt="Daihatsu" class="h-5 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer" title="Pièces Daihatsu">
+                    </div>
+                </div>
 
                 <!-- User & Cart Actions -->
                 <div class="flex items-center gap-4">
