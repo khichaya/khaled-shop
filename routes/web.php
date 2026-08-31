@@ -73,6 +73,9 @@ Route::get('/generate-token', function () {
 Route::get('/car-finder/{brand}', [CarFinderController::class, 'showModels'])->name('car.models');
 Route::get('/car-finder/{brand}/{model}', [CarFinderController::class, 'showYears'])->name('car.years');
 Route::post('/car-finder/{brand}/{model}/parts', [CarFinderController::class, 'getParts'])->name('car.parts');
-
+Route::get('/check-toyota', function () {
+    $products = App\Models\Product::where('car_brand', 'Toyota')->get(['name', 'car_brand', 'car_model', 'years']);
+    return $products;
+});
 
 require __DIR__.'/auth.php';
