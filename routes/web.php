@@ -68,5 +68,19 @@ Route::get('/generate-token', function () {
     $token = $user->createToken('pos-sync-token')->plainTextToken;
     return "Your API Token is: <br><textarea style='width:100%; height:100px; font-size:18px;'>". $token ."</textarea>";
 });
-// مسارات المصادقة (تسجيل الدخول/إنشاء حساب)
+// مسار مؤقت لإضافة أعمدة السيارات في Render PostgreSQL
+Route::get('/add-car-columns', function () {
+    try {
+        // في PostgreSQL نستخدم ADD COLUMN IF NOT EXISTS لتجنب الأخطاء
+        DB::statement('ALTER TABLE products ADD COLUMN IF NOT EXISTS car_brand VARCHAR(255) NULL');
+        DB::statement('ALTER TABLE products ADD COLUMN IF NOT EXISTS car_model VARCHAR(255) NULL');
+        DB::statement('ALTER TABLE products ADD COLUMN IF NOT EXISTS years VARCHAR(255) NULL');
+        
+        return '✅ Columns (car_brand, car_model, years) added successfully to PostgreSQL!';
+    } catch (\Exception $e) {
+        return '❌ Error: ' . $e->getMessage();
+    }
+});
+
+
 require __DIR__.'/auth.php';
