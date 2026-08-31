@@ -17,7 +17,7 @@
             @endphp
             <a href="{{ route('car.years', ['brand' => $brand, 'model' => $model]) }}" class="block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
                 <div class="bg-gray-50 h-40 flex items-center justify-center p-4">
-                    <img src="{{ asset('images/cars/' . $imageName) }}" alt="{{ $model }}" class="h-full w-auto object-contain group-hover:scale-105 transition duration-300"
+                    <img src="{{ asset('Images/cars/' . $imageName) }}" alt="{{ $model }}" class="h-full w-auto object-contain group-hover:scale-105 transition duration-300"
                          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-full text-gray-300\'><i class=\'fa-solid fa-car-side text-5xl\'></i></div>';">
                 </div>
                 <div class="p-4 text-center border-t border-gray-100">
