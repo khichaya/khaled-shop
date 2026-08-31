@@ -58,6 +58,7 @@ class CarFinderController extends Controller
     }
 
     // 3. الفلترة النهائية وجلب القطع حسب السنة المختارة
+       // 3. الفلترة النهائية وجلب القطع حسب السنة المختارة
     public function getParts(Request $request, $brand, $model)
     {
         $selectedYears = $request->input('years', []);
@@ -77,7 +78,7 @@ class CarFinderController extends Controller
                 if (strpos($yearsString, '-') !== false) {
                     list($start, $end) = explode('-', $yearsString);
                     if ($year >= (int)trim($start) && $year <= (int)trim($end)) {
-                        return true; // القطعة توافق هذه السنة
+                        return true; 
                     }
                 } elseif (strpos($yearsString, ',') !== false) {
                     $parts = array_map('trim', explode(',', $yearsString));
@@ -93,6 +94,19 @@ class CarFinderController extends Controller
             return false;
         });
 
-        return view('catalog', ['products' => $filteredProducts]);
+        // ✅ الترقيم اليدوي (Manual Pagination) لتجنب خطأ 500
+        $perPage = 12;
+        $page = $request->input('page', 1);
+        $items = $filteredProducts->slice(($page - 1) * $perPage, $perPage);
+        
+        $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
+            $items, 
+            $filteredProducts->count(), 
+            $perPage, 
+            $page, 
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('catalog', ['products' => $paginatedProducts]);
     }
 }
