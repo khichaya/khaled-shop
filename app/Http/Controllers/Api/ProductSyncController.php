@@ -28,6 +28,9 @@ class ProductSyncController extends Controller
             'current_stock'    => 'nullable|numeric',
             'colors'           => 'nullable|string',
             'compatibility'    => 'nullable|string',
+            'car_brand'        => 'nullable|string|max:255', // ✅
+            'car_model'        => 'nullable|string|max:255', // ✅
+            'years'            => 'nullable|string|max:255',  // ✅
             'category_name'    => 'nullable|string|max:255',
             'unit_name'        => 'nullable|string|max:255',
             'supplier_name'    => 'nullable|string|max:255',
@@ -65,6 +68,9 @@ class ProductSyncController extends Controller
         $product->current_stock  = $validated['current_stock'] ?? 0;
         $product->colors         = $validated['colors'] ?? null;
         $product->compatibility  = $validated['compatibility'] ?? null;
+        $product->car_brand = $validated['car_brand'] ?? null;
+        $product->car_model = $validated['car_model'] ?? null;
+        $product->years = $validated['years'] ?? null;
         $product->is_active      = $request->boolean('is_active', true);
         
         // ✅ ربط المعرّفات

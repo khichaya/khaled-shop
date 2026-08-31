@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\ProductSyncController;
+use App\Http\Controllers\CarFinderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,7 +69,10 @@ Route::get('/generate-token', function () {
     $token = $user->createToken('pos-sync-token')->plainTextToken;
     return "Your API Token is: <br><textarea style='width:100%; height:100px; font-size:18px;'>". $token ."</textarea>";
 });
-
+// مسارات البحث المتسلسل عن قطع الغيار
+Route::get('/car-finder/{brand}', [CarFinderController::class, 'showModels'])->name('car.models');
+Route::get('/car-finder/{brand}/{model}', [CarFinderController::class, 'showYears'])->name('car.years');
+Route::post('/car-finder/{brand}/{model}/parts', [CarFinderController::class, 'getParts'])->name('car.parts');
 
 
 require __DIR__.'/auth.php';
