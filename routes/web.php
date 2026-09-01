@@ -83,4 +83,7 @@ Route::get('/check-toyota', function () {
 Route::get('/car-finder/{brand}', [CarFinderController::class, 'showModels'])->name('car.models');
 Route::get('/car-finder/{brand}/{model}', [CarFinderController::class, 'showYears'])->name('car.years');
 Route::post('/car-finder/{brand}/{model}/parts', [CarFinderController::class, 'getParts'])->name('car.parts');
+Route::get('/check-cars', function () {
+    return \App\Models\CarCatalog::all();
+});
 require __DIR__.'/auth.php';
