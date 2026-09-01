@@ -177,65 +177,15 @@
 
         
                <!-- 3. Desktop Categories Menu -->
-        <nav class="bg-brandDark-200 text-white hidden md:block border-t border-white/10">
-            <div class="max-w-7xl mx-auto px-8 flex items-center gap-8 text-sm font-medium h-11">
-                <a href="{{ route('home') }}" class="text-amber-400 font-bold border-b-2 border-khaled py-2.5">Accueil</a>
-                
-                <!-- 1. Filtration & Huiles -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Filtration & Huiles <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="{{ route('products.byType', 'Filtre à huile & carburant') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtre à huile & carburant</a>
-                        <a href="{{ route('products.byType', 'Filtre à air & habitacle') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Filtre à air & habitacle</a>
-                        <a href="{{ route('products.byType', 'Huiles moteur & transmissions') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Huiles moteur & transmissions</a>
+                            <!-- ✅ شعارات ماركات السيارات (مجلوبة من قاعدة البيانات) -->
+                    <div class="flex items-center gap-8 justify-center pt-1">
+                        @php $brands = \App\Models\CarCatalog::whereNotNull('brand_logo')->distinct()->get(['brand', 'brand_logo']); @endphp
+                        @foreach($brands as $brandItem)
+                            <a href="{{ route('car.models', ['brand' => $brandItem->brand]) }}" class="block" title="Pièces {{ $brandItem->brand }}">
+                                <img src="{{ asset('storage/' . $brandItem->brand_logo) }}" alt="{{ $brandItem->brand }}" class="h-8 object-contain opacity-60 hover:opacity-100 hover:scale-110 transition cursor-pointer">
+                            </a>
+                        @endforeach
                     </div>
-                </div>
-
-                <!-- 2. Freinage & Suspension -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Freinage & Suspension <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="{{ route('products.byType', 'Plaquettes & disques de frein') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Plaquettes & disques de frein</a>
-                        <a href="{{ route('products.byType', 'Amortisseurs & ressorts') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Amortisseurs & ressorts</a>
-                        <a href="{{ route('products.byType', 'Rotules & bras de suspension') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Rotules & bras de suspension</a>
-                    </div>
-                </div>
-
-                <!-- 3. Moteur & Embrayage -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Moteur & Embrayage <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="{{ route('products.byType', 'Kits de distribution & courroies') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits de distribution & courroies</a>
-                        <a href="{{ route('products.byType', 'Kits d\'embrayage & volants moteur') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Kits d'embrayage & volants moteur</a>
-                        <a href="{{ route('products.byType', 'Bougies d\'allumage & préchauffage') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Bougies d'allumage & préchauffage</a>
-                        <a href="{{ route('products.byType', 'Pompes à eau & thermostats') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Pompes à eau & thermostats</a>
-                    </div>
-                </div>
-
-                <!-- 4. Électricité & Capteurs -->
-                <div class="relative group py-2.5 cursor-pointer">
-                    <span class="hover:text-amber-400 flex items-center gap-1 transition">
-                        Électricité & Capteurs <i class="fa-solid fa-chevron-down text-[10px]"></i>
-                    </span>
-                    <div class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl rounded-b-lg hidden group-hover:block p-3 z-50 border-t-2 border-khaled">
-                        <a href="{{ route('products.byType', 'Batteries & alternateurs') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Batteries & alternateurs</a>
-                        <a href="{{ route('products.byType', 'Démarreurs') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Démarreurs</a>
-                        <a href="{{ route('products.byType', 'Capteurs & sondes (MAF, Lambda...)') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Capteurs & sondes (MAF, Lambda...)</a>
-                        <a href="{{ route('products.byType', 'Optiques de phares & ampoules') }}" class="block py-1.5 px-2 hover:bg-red-50 hover:text-khaled rounded text-xs font-semibold">Optiques de phares & ampoules</a>
-                    </div>
-                </div>
-
-                <a href="#" class="ml-auto bg-khaled text-white text-xs px-3.5 py-1 rounded-full font-bold hover:bg-khaled-dark transition">
-                    Promotions & Arrivages 🏷️
-                </a>
-            </div>
-        </nav>
     </header>
     <!-- ✅ شريط ماركات السيارات للهواتف المحمولة -->
     <div class="md:hidden bg-white border-b border-gray-100 py-2 px-4 flex items-center justify-around shadow-sm">
@@ -258,67 +208,15 @@
     </main>
 
     
-       <!-- 4. Mobile Bottom Navigation -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2.5 px-4 flex justify-around items-center z-50 shadow-lg">
-        
-        <!-- الرئيسية -->
-        <a href="{{ route('home') }}" class="flex flex-col items-center text-khaled">
-            <i class="fa-solid fa-house text-lg"></i>
-            <span class="text-[10px] font-bold mt-0.5">Accueil</span>
-        </a>
-
-        <!-- السلة -->
-        <a href="{{ route('cart.index') }}" class="flex flex-col items-center text-gray-500 hover:text-khaled relative">
-            <i class="fa-solid fa-cart-shopping text-lg"></i>
-            <span class="text-[10px] mt-0.5">Panier</span>
-            @php $cart_count = count(session()->get('cart', [])); @endphp
-            @if($cart_count > 0)
-                <span class="absolute -top-1 -right-2 bg-khaled text-white text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center">{{ $cart_count }}</span>
-            @endif
-        </a>
-
-        <!-- القائمة (للبحث عن منتج) -->
-        <a href="#" onclick="document.getElementById('mobile-search-btn').click();" class="flex flex-col items-center text-gray-500 hover:text-khaled">
-            <i class="fa-solid fa-magnifying-glass text-lg"></i>
-            <span class="text-[10px] mt-0.5">Recherche</span>
-        </a>
-
-        <!-- حسابي (قائمة منسدلة) -->
-        <div class="relative group">
-            <button class="flex flex-col items-center text-gray-500 hover:text-khaled focus:outline-none">
-                <i class="fa-regular fa-user text-lg"></i>
-                <span class="text-[10px] mt-0.5">Compte</span>
-            </button>
-            
-            <!-- القائمة المنسدلة للأيقونة -->
-            <div class="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 overflow-hidden">
-                @auth
-                    <a href="{{ route('profile.index') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled border-b border-gray-50">
-                        <i class="fa-solid fa-box mr-2"></i> Mes Commandes
-                    </a>
-                    <a href="{{ route('profile.edit') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled">
-                        <i class="fa-solid fa-user-gear mr-2"></i> Mon Profil
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 border-t border-gray-50">
-                            <i class="fa-solid fa-right-from-bracket mr-2"></i> Déconnexion
-                        </button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled border-b border-gray-50">
-                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Connexion
-                    </a>
-                    <a href="{{ route('register') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-khaled">
-                        <i class="fa-solid fa-user-plus mr-2"></i> S'inscrire (Nouveau)
-                    </a>
-                @endauth
-            </div>
-        </div>
-        
-        {{-- زر مخفي لتشغيل البحث عند الضغط على أيقونة البحث --}}
-        <button id="mobile-search-btn" type="button" class="hidden" data-bs-toggle="modal" data-bs-target="#mobileSearchModal"></button>
-
+       
+        <!-- ✅ شريط ماركات السيارات للهواتف المحمولة (مجلوب من قاعدة البيانات) -->
+    <div class="md:hidden bg-white border-b border-gray-100 py-2 px-4 flex items-center justify-around shadow-sm">
+        @php $brands = \App\Models\CarCatalog::whereNotNull('brand_logo')->distinct()->get(['brand', 'brand_logo']); @endphp
+        @foreach($brands as $brandItem)
+            <a href="{{ route('car.models', ['brand' => $brandItem->brand]) }}" class="block" title="Pièces {{ $brandItem->brand }}">
+                <img src="{{ asset('storage/' . $brandItem->brand_logo) }}" alt="{{ $brandItem->brand }}" class="h-7 object-contain opacity-60 active:opacity-100 transition cursor-pointer">
+            </a>
+        @endforeach
     </div>
 
     <!-- نافذة البحث المنبثقة للهاتف -->

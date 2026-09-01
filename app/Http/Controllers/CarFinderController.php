@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\CarCatalog;
 use Illuminate\Http\Request;
 
 class CarFinderController extends Controller
@@ -10,12 +11,10 @@ class CarFinderController extends Controller
     // 1. عرض مربعات السيارات (الموديلات) حسب الماركة
     public function showModels($brand)
     {
-        // جلب الموديلات الموجودة لهذه الماركة في قاعدة البيانات
-        $models = Product::where('car_brand', $brand)
-                         ->whereNotNull('car_model')
-                         ->distinct()
-                         ->pluck('car_model')
-                         ->toArray();
+        // ✅ جلب الموديلات والصور المرتبطة بها من جدول car_catalogs
+        $models = CarCatalog::where('brand', $brand)
+                            ->where('is_active', true)
+                            ->get(['model', 'model_image']);
 
         return view('car-finder-models', compact('brand', 'models'));
     }
@@ -58,7 +57,6 @@ class CarFinderController extends Controller
     }
 
     // 3. الفلترة النهائية وجلب القطع حسب السنة المختارة
-       // 3. الفلترة النهائية وجلب القطع حسب السنة المختارة
     public function getParts(Request $request, $brand, $model)
     {
         $selectedYears = $request->input('years', []);
@@ -78,7 +76,7 @@ class CarFinderController extends Controller
                 if (strpos($yearsString, '-') !== false) {
                     list($start, $end) = explode('-', $yearsString);
                     if ($year >= (int)trim($start) && $year <= (int)trim($end)) {
-                        return true; 
+                        return true; // القطعة توافق هذه السنة
                     }
                 } elseif (strpos($yearsString, ',') !== false) {
                     $parts = array_map('trim', explode(',', $yearsString));
@@ -94,7 +92,7 @@ class CarFinderController extends Controller
             return false;
         });
 
-        // ✅ الترقيم اليدوي (Manual Pagination) لتجنب خطأ 500
+        // الترقيم اليدوي (Manual Pagination) لتجنب خطأ 500 في صفحة الكتالوج
         $perPage = 12;
         $page = $request->input('page', 1);
         $items = $filteredProducts->slice(($page - 1) * $perPage, $perPage);

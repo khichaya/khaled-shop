@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\ProductSyncController;
 use App\Http\Controllers\CarFinderController;
-/*
+ /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -78,4 +78,9 @@ Route::get('/check-toyota', function () {
     return $products;
 });
 
+
+// مسارات البحث المتسلسل عن قطع الغيار
+Route::get('/car-finder/{brand}', [CarFinderController::class, 'showModels'])->name('car.models');
+Route::get('/car-finder/{brand}/{model}', [CarFinderController::class, 'showYears'])->name('car.years');
+Route::post('/car-finder/{brand}/{model}/parts', [CarFinderController::class, 'getParts'])->name('car.parts');
 require __DIR__.'/auth.php';
