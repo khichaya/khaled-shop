@@ -96,12 +96,13 @@
                     </form>
                     
                     <!-- ✅ شعارات ماركات السيارات (للحاسوب - مجلوبة ديناميكياً) -->
+                                       <!-- ✅ شعارات ماركات السيارات (للحاسوب - شعار واحد لكل ماركة) -->
                     <div class="flex items-center gap-8 justify-center pt-1">
                         @php 
                             $brandsDesktop = \App\Models\CarCatalog::whereNotNull('brand_logo')
                                             ->select('brand', 'brand_logo')
-                                            ->distinct()
-                                            ->get(); 
+                                            ->get()
+                                            ->unique('brand'); // إزالة التكرار بناءً على اسم الماركة فقط
                         @endphp
                         @foreach($brandsDesktop as $brandItem)
                             <a href="{{ route('car.models', ['brand' => $brandItem->brand]) }}" class="block" title="Pièces {{ $brandItem->brand }}">
@@ -225,12 +226,13 @@
     </header>
 
     <!-- ✅ شريط ماركات السيارات للهواتف المحمولة (مجلوب ديناميكياً) -->
+    <!-- ✅ شريط ماركات السيارات للهواتف المحمولة (شعار واحد لكل ماركة) -->
     <div class="md:hidden bg-white border-b border-gray-100 py-2 px-4 flex items-center justify-around shadow-sm">
         @php 
             $brandsMobile = \App\Models\CarCatalog::whereNotNull('brand_logo')
                             ->select('brand', 'brand_logo')
-                            ->distinct()
-                            ->get(); 
+                            ->get()
+                            ->unique('brand'); 
         @endphp
         @foreach($brandsMobile as $brandItem)
             <a href="{{ route('car.models', ['brand' => $brandItem->brand]) }}" class="block" title="Pièces {{ $brandItem->brand }}">
