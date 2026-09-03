@@ -7,4 +7,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/delete-product', [ProductSyncController::class, 'destroy']); // <--- إضافة هذا المسار
     Route::post('/update-order-status', [OrderStatusController::class, 'update']);
     Route::post('/sync-car-catalog', [CarCatalogSyncController::class, 'sync']);
+    Route::post('/delete-car-catalog', [CarCatalogSyncController::class, 'destroy']);
     });

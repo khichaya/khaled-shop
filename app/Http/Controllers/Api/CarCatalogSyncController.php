@@ -34,4 +34,28 @@ class CarCatalogSyncController extends Controller
         $car->save();
         return response()->json(['message' => 'Car catalog synced successfully']);
     }
+        public function destroy(Request $request)
+    {
+        $validated = $request->validate([
+            'brand' => 'required|string',
+            'model' => 'required|string',
+        ]);
+
+        // البحث عن السيارة في قاعدة بيانات الموقع
+        $car = CarCatalog::whereRaw('LOWER(brand) = ?', [strtolower($validated['brand'])])
+                         ->whereRaw('LOWER(model) = ?', [strtolower($validated['model'])])
+                         ->first();
+
+        if ($car) {
+            // حذف الصور من استضافة Render (لتنظيف المساحة)
+            if ($car->brand_logo) Storage::disk('public')->delete($car->brand_logo);
+            if ($car->model_image) Storage::disk('public')->delete($car->model_image);
+            
+            // حذف السجل من قاعدة البيانات
+            $car->delete();
+            return response()->json(['message' => 'Car deleted successfully from cloud']);
+        }
+
+        return response()->json(['message' => 'Car not found'], 404);
+    }
 }
